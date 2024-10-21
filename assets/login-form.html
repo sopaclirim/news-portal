@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Nunito:wght@200;300;400;500;600;700&display=swap');
+
+        *{
+            margin:0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            /* background: #0f0e0e00; */
+            background-image: url(./images/4893666.jpg);
+            background-position: center;
+            background-attachment: fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .back-to-homepage{
+            position: absolute;
+            top:2%;
+            left:2%;
+        }
+
+        .back-to-homepage > a{
+            text-decoration: none;
+            color:#ffffff;
+        }
+
+        .back-to-homepage > a:hover{
+            border-bottom: 1px solid white;
+        }
+
+
+        .login-form{
+            margin:200px auto;
+            width:350px;
+            padding:30px 50px 70px;
+            background: #0f0e0e;
+            color:white;
+        }
+
+        .fa-user{
+            font-size: 25px;
+        }
+
+        h2{
+            text-align: center;
+        }
+        
+        h3{
+            text-align: center;
+            padding:5px;
+            margin-bottom: 10px;
+        }
+
+        input{
+            width:100%;
+            padding:7px;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        label{
+            padding:5px 0 1px;
+            display: inline-block;
+        }
+
+        button{
+            width:100%;
+            margin-top:30px;
+            padding:10px;
+            background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+            border:none;
+            font-family: 'Nunito', sans-serif;
+            color:white;
+            cursor: pointer;
+        }
+
+        #button:hover{
+            background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9, 9, 121, 0.501) 35%, rgba(0,212,255,1) 100%);
+        }
+
+        .create-acc{
+            margin-top:45px;
+            padding-top:10px;
+            text-align: end;
+        }
+
+        .create-acc a {
+            color:aliceblue;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .create-acc a:hover {
+            text-decoration: underline;
+        }
+
+        span{
+            font-style: italic;
+            font-size:smaller;
+        }
+
+    </style>
+</head>
+<body>
+    <p class="back-to-homepage"><a href="../index.html"><i class="fa-solid fa-arrow-left-long"></i> Go back</a></p>
+    <div class="login-form">
+        <form action="#">
+            <h2><i class="fa-solid fa-user"></i></h2>
+            <h3>Login</h3>
+            <label for="username">Username:&nbsp;</label><span id="username-msg"></span><br/>
+            <input type="text" id="username" placeholder="Username" /><br/><br/>
+
+            <label for="pw">Password:&nbsp;</label><span id="password-msg"></span><br/>
+            <input type="password" id="pw" placeholder="Password"/><br/>
+
+            <button type="submit" id="button">Login</button>
+
+            <p class="create-acc"><a href="#">No account yet? Create one!</a></p>
+        </form>
+    </div>
+
+    <script>
+        const username = document.getElementById('username')
+        const password = document.getElementById('pw')
+        const usernameError = document.querySelector('#username-msg')
+        const passwordError = document.querySelector('#password-msg')
+
+        document.querySelector('button').addEventListener('click', (event) => {
+
+        event.preventDefault()
+
+            //validate username
+            if(validateUsername(username.value)){
+                usernameError.innerText = 'Username is not valid'
+                usernameError.style.color = 'red'
+                username.style.borderColor = 'red'
+            }else{
+                usernameError.innerText = 'Username is valid'
+                usernameError.style.color = 'green'
+                username.style.borderColor = 'green'
+            }
+
+            //validate password
+            if(validatePassword(password.value)){
+                passwordError.innerText = 'Password is not valid'
+                passwordError.style.color = 'red'
+                password.style.borderColor = 'red'
+            }else{
+                passwordError.innerText = 'Password is valid'
+                passwordError.style.color = 'green'
+                password.style.borderColor = 'green'
+            }
+
+        })
+
+        //Validimi i formave me Regular Expressions
+        function validateUsername(username){
+            const regex = "^[A-Za-z]\\w{5,29}$"
+            return username.match(regex) === null
+        }
+
+        function validatePassword(password){
+            const regex = /^[A-Za-z]\w{7,14}$/g
+            return password.match(regex) === null
+        }
+
+    </script>
+    
+</body>
+</html>
